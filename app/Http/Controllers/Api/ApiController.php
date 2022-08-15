@@ -219,7 +219,7 @@ class ApiController extends Controller
 
         $carts_all = Cart::all();
 
-        $prodcart = ProdCart::where('prod_id', '=', "{$id}")->delete();
+        $prodcart = ProdCart::find($id)->delete();
 
         $array['msg'] = 'Registros deletados com sucesso';
 
