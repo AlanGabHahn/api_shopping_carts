@@ -187,19 +187,6 @@ class ApiController extends Controller
 
         $quanty   = $request->input('quanty');
 
-        //aplicar a atualização do produto
-        $carts_all = Cart::all();
-
-        //validação para só permitir alterar o item com o carrinho aberto
-        foreach($carts_all as $carts){
-            $cart_where = Cart::where('status', 'aberto')->orderby('id', 'desc')->first();
-            if($cart_where){
-                $data = Cart::find($carts->id);
-            }else{
-                $array['error'] = 'Carrinho fechado, não é permitido a alteração do iten';
-                return $array;
-            }
-        }
 
         $data = ProdCart::find($id);
         $prod = Prod::find($data->prod_id);
@@ -232,16 +219,6 @@ class ApiController extends Controller
 
         $carts_all = Cart::all();
 
-        //validação para só permitir deletar o item com o carrinho aberto
-        foreach($carts_all as $carts){
-            $cart_where = Cart::where('status', 'aberto')->orderby('id', 'desc')->first();
-            if($cart_where){
-                $data = Cart::find($carts->id);
-            }else{
-                $array['error'] = 'Carrinho fechado, não é permitido deletar o item';
-                return $array;
-            }
-        }
         $prodcart = ProdCart::where('prod_id', '=', "{$id}")->delete();
 
         $array['msg'] = 'Registros deletados com sucesso';
