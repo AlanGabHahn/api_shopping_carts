@@ -19,8 +19,8 @@ return new class extends Migration
             //total do valor do carrinho
             $table->decimal('value_tot', 12,2)->nullable();
             //situação do carrinho
-            $table->string('situacion', 2)->nullable();
-            //ip do usuário do carrinho
+            $table->string('status', 20)->nullable();
+            //id do usuário do carrinho
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
 

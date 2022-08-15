@@ -11,7 +11,7 @@ class Cart extends Model
 
     protected $fillable = [
         'user_id',
-        'situacion',
+        'status',
         'value_tot'
     ];
 }

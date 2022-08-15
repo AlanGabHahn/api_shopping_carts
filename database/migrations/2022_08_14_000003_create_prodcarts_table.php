@@ -24,6 +24,8 @@ return new class extends Migration
             $table->foreign('cart_id')->references('id')->on('carts');
             //valor do produto
             $table->decimal('value', 12, 2)->nullable();
+            //nome do produto
+            $table->string('name_prod', 200)->nullable();
             //quantidade do produto
             $table->string('quanty', 20)->nullable();
 
