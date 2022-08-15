@@ -84,7 +84,8 @@ class ApiController extends Controller
         $carts_all = Cart::all();
 
         foreach($carts_all as $carts){
-            if($carts->status == 'aberto'){
+            $cart_where = Cart::where('status', 'aberto')->orderby('id', 'desc')->first();
+            if($cart_where){
                 $data = Cart::find($carts->id);
             }else{
                 $array['error'] = 'É necessário abrir um carrinho para continuar';
@@ -191,8 +192,9 @@ class ApiController extends Controller
 
         //validação para só permitir alterar o item com o carrinho aberto
         foreach($carts_all as $carts){
-            if($carts->status == 'aberto'){
-                $cart = Cart::find($carts->id);
+            $cart_where = Cart::where('status', 'aberto')->orderby('id', 'desc')->first();
+            if($cart_where){
+                $data = Cart::find($carts->id);
             }else{
                 $array['error'] = 'Carrinho fechado, não é permitido a alteração do iten';
                 return $array;
@@ -232,8 +234,9 @@ class ApiController extends Controller
 
         //validação para só permitir deletar o item com o carrinho aberto
         foreach($carts_all as $carts){
-            if($carts->status == 'aberto'){
-                $cart = Cart::find($carts->id);
+            $cart_where = Cart::where('status', 'aberto')->orderby('id', 'desc')->first();
+            if($cart_where){
+                $data = Cart::find($carts->id);
             }else{
                 $array['error'] = 'Carrinho fechado, não é permitido deletar o item';
                 return $array;
